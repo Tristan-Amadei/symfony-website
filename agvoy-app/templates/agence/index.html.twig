@@ -6,24 +6,24 @@
     <h1>Bead & Breakfast</h1>
     <br/>
     <p> Please have fun on this website and let's hope you find what you were looking for! </p>
-    <p>Veuillez utiliser la barre supérieure pour naviguer sur le site.</p>
+    <p>Please use the upper bar to browse the site</p>
     {% if is_granted('ROLE_OWNER') %}
-    <p>Vous êtes connecté en tant que Propriétaire. Vous êtes toujours un utilisateur et avez donc les mêmes droits que les simples utilisateurs. 
-    Vous pouvez aussi mettre en ligne les propriétés que vous voulez louer. Pour cela, rendez-vous sur votre page Propriétaire personnelle
-    en cliquant sur 'Your Owner Page' dans le menu déroulant Account dans la barre supérieure. Vos informations y sont affichées; pour ajouter une couette et café, 
-    cliquez sur 'Go to Rooms'. </p>
+      <p>You are currently logged in as an owner. You are still a user and therefore have the same rights as ordinary users. 
+      You can also upload the properties you want to rent. To do this, go to your personal Owner Page
+      by clicking on 'Your Owner Page' in the Account drop-down menu in the top bar. Your information is displayed there; to add a duvet and coffee, 
+      click on 'Go to Rooms'. </p>
     {% else %}
       {% if is_granted('ROLE_ADMIN') %}
-        <p>Bienvenue Admin ! Vous avez tous les droits sur ce site, vous pouvez soit le naviguer comme un utilisateur standard, ou bien 
-        vous pouvez aller dans le BackOffice dans la barre supérieure et contrôler tous les aspects du site, jusqu'aux utilisateurs.</p>
+        <p>Welcome Admin! You have full rights on this site, you can either browse it as a standard user, or 
+        you can go to the BackOffice in the top bar and control all aspects of the site, right down to the users.</p>
       {% else %}
         {% if is_granted('ROLE_USER') %}
-        <p>Si vous êtes un propriétaire d'un logement que vous souhaitez afficher sur ce site, vous devez créer votre profil de Propriétaire. Pour cela, cliquez sur 
-        <a href="{{path('owner_new')}}">ici</a> ou bien cliquez sur 'Register as an Owner' dans le menu déroulant Account dans la barre supérieure.</p>
+        <p>If you are an owner of a property that you wish to display on this site, you must create your Owner profile. To do this, click on
+        <a href="{{path('owner_new')}}">there</a> or click on 'Register as an Owner' in the Account drop-down menu in the top bar</p>
         {% else %}
-      <p>Si vous êtes un propriétaire d'un logement que vous souhaitez afficher sur ce site, vous devez d'abord <a href="{{ path('app_register') }}">créer votre compte utilisateur</a>
-      ou bien <a href="{{ path('app_login') }}">vous connecter à votre compte</a>.
-      <br/>Il faudra alors chercher le menu 'Create your owner account' présent dans le menu déroulant Account dans la barre supérieure.</p>
+      <p>If you are an owner of an accommodation that you wish to post on this site, you must first <a href="{{ path('app_register') }}">create your user account</a>
+      or <a href="{{ path('app_login') }}">log in to your account</a>.
+      <br/>Look for the 'Create your owner account' menu in the Account drop-down menu in the top bar.</p>
       {% endif %}
       {% endif %}
     {% endif %}
@@ -65,7 +65,7 @@
   transition: 0s
 }
 </style>
-<a href="{{ path('public_region_index') }}"><button class="button-accueil">Annonces Par Région</button></a>
+<a href="{{ path('public_region_index') }}"><button class="button-accueil">Browse by Region</button></a>
 
 {% endblock %}
 {% block footer %} 
