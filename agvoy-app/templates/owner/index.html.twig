@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Owners{% endblock %}
+
+{% block main %}
+{% if is_granted('ROLE_OWNER') and your_owner.user.id == app.user.id %}
+    <h1>Your Owner Page</h1>
+    <li><a href="{{ path('owner_show', {'id': your_owner.id}) }}">{{your_owner.firstname}} {{your_owner.familyName}}</a></li>
+    <hr>
+    <h3>List of Owners</h3>
+{% else %}
+<h1>List of Owners</h1>
+{%endif%}
+
+<ul>
+    {% for owner in owners %}
+        <li>
+            <a href="{{ path('owner_show', {'id': owner.id}) }}">{{owner.firstname}} {{owner.familyName}}</a>
+        </li>
+    {%endfor%}
+</ul>
+
+<br />
+<a href="{{ path('public_region_index') }}">Go to Regions</a>
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

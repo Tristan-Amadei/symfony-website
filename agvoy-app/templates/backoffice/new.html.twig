@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Region{% endblock %}
+
+{% block main %}
+    <h1>Create new Region</h1>
+
+    {{ include('backoffice/_form.html.twig') }}
+
+    <a href="{{ path('region_index') }}">&#x21A9; Back to list</a>
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

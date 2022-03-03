@@ -1,0 +1,6 @@
+{
+    "require": {
+        "symfony/asset": "^5.3",
+        "camurphy/bootstrap-menu-bundle": "^1.3"
+    }
+}

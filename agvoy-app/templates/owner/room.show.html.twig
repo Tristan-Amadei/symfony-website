@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room N°{{room.id}}{% endblock %}
+
+{% block main %}
+    <h2>Room n°{{room.id}}</h2>
+
+    <ul>
+        <li>{{room.Summary}}</li>
+        <ul>
+            <li>Description: {{room.Description}}</li>
+        </ul>
+        <br />
+        <li>Capacity: {{room.Capacity}} people</li>
+        <li>Superficy: {{room.Superficy}} m²</li>
+        <li>Price: {{room.price}} €/day</li>
+        {% if room.Address %}
+            <li>Address: {{room.Address}}</li>
+        {% endif %}
+        <br/>
+        <img src="{{ vich_uploader_asset(room, 'imageFile') }}"/>
+
+    </ul>
+
+<br/>
+<td><a href="{{ path('owner_room_edit', {'id': owner.id, 'id_room': room.id}) }}"><button class="button-blue" type="button">Edit</button></a></td>
+
+<br/>
+<br/>
+<td><a href="{{ path('owner_room_index', {'id': owner.id}) }}"><button class="button2" type="button">&#x21A9; Back to Owner's Rooms</button></a></td>
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

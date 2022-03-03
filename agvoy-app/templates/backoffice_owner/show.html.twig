@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Owner{% endblock %}
+
+{% block main %}
+    <h1>Owner</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ owner.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ owner.firstname }}</td>
+            </tr>
+            <tr>
+                <th>FamilyName</th>
+                <td>{{ owner.familyName }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ owner.address }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ owner.country }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_owner_index') }}">&#x21A9; Back to list</a>
+
+    <a href="{{ path('backoffice_owner_edit', {'id': owner.id}) }}">Edit</a>
+
+    {{ include('backoffice_owner/_delete_form.html.twig') }}
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

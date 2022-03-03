@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Owner{% endblock %}
+
+{% block main %}
+    <h1>Create new Owner</h1>
+
+    {{ include('backoffice_owner/_form.html.twig') }}
+
+    <a href="{{ path('backoffice_owner_index') }}">&#x21A9; Back to list</a>
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

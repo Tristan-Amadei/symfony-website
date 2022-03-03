@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faved Rooms{% endblock %}
+
+{% block main %}
+<h1>Rooms you Faved !</h1>
+
+<ul>
+    {% set panier = app.session.get('panier') %}
+    {% dump(panier) %}
+    {% for room in rooms %}
+        {% if room.id in panier %}
+            <li>
+                <a href="{{ path('public_room_show', {'id': room.id}) }}">{{room.summary}}</a>
+                {% if is_granted('ROLE_USER') %}
+                    <ul>Address: {{room.Address}}, Owner: <a href="{{ path('owner_show', {'id': room.owner.id}) }}">{{room.owner.firstname}} {{room.owner.familyName}}</a></ul>
+                {% else %}
+                    <ul>Address: {{room.Address}}, Owner: {{room.owner.firstname}} {{room.owner.familyName}}</a></ul>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<br />
+
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

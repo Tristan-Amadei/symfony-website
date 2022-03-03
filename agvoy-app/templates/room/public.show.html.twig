@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room N°{{room.id}}{% endblock %}
+
+{% block main %}
+<style>
+            .button-favorite {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #000000;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            }
+
+            .button-favorite span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            }
+
+            .button-favorite span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+            }
+
+            .button-favorite:hover span {
+            padding-right: 25px;
+            }
+
+            .button-favorite:hover span:after {
+            opacity: 1;
+            right: 0;
+            }
+        </style>
+    <h2>Room n°{{room.id}}</h2>
+
+    <ul>
+        <li>{{room.Summary}}</li>
+        <ul>
+            <li>Description: {{room.Description}}</li>
+        </ul>
+        <br />
+        <li>Capacity: {{room.Capacity}} people</li>
+        <li>Superficy: {{room.Superficy}} m²</li>
+        <li>Price: {{room.price}} €/day</li>
+        {% if room.Address %}
+            <li>Address: {{room.Address}}</li>
+        {% endif %}
+        
+
+        {% if is_granted('ROLE_USER') %}
+            <li>Owner: <a href="{{ path('owner_show', {'id': room.Owner.id}) }}">{{room.Owner.firstname}} {{room.Owner.familyName}}</a></li>
+        {% else %}
+            <li>Owner: {{room.Owner.firstname}} {{room.Owner.familyName}}</a></li>
+        {% endif %}
+        <br/>
+        <img src="{{ vich_uploader_asset(room, 'imageFile') }}"/>
+    </ul>
+
+{% if is_granted('ROLE_USER') %}
+    {% set panier = app.session.get('panier') %}
+    {% dump(panier) %}
+    {% if room.id in panier %}
+        <br/>
+        <br/>
+        <br/>
+        <div class="button-fav-container">
+                <button class="button-favorite" style="vertical-align:middle"><span><a href="{{ path('cart_mark', {'id': room.id}) }}" style="text-decoration: none; color:white">Remove from Favorites    &#128078; </button></a> </span></button>
+                
+        </div>
+        <br/>
+        <br/>
+    {% else %}
+        <br/>
+        <br/>
+        <br/>
+        <div class="button-fav-container">
+                <button class="button-favorite" style="vertical-align:middle"><span><a href="{{ path('cart_mark', {'id': room.id}) }}" style="text-decoration: none; color:white">Add to Favorites   &#128077;</button></a> </span></button>
+                
+        </div>
+        <br/>
+        <br/>
+    {% endif %}
+{% endif %}
+<br/>
+<br/>
+    <a href="{{ path('public_region_index') }}"><button class="button2" type="button">&#x21A9; Back to Regions</button></a>
+
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

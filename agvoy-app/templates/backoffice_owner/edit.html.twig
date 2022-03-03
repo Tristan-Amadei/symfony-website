@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Owner{% endblock %}
+
+{% block main %}
+    <h1>Edit Owner</h1>
+
+    {{ include('backoffice_owner/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backoffice_owner_index') }}">&#x21A9; Back to list</a>
+
+    {{ include('backoffice_owner/_delete_form.html.twig') }}
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

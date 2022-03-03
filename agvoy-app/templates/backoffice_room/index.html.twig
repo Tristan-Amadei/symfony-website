@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room index{% endblock %}
+
+{% block main %}
+    <h1>Room index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Summary</th>
+                <th>Owner</th>
+                <th>Capacity</th>
+                <th>Superficy</th>
+                <th>Price</th>
+                <th>Address</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.summary }}</td>
+                <td>{{ room.owner.firstname }} {{room.owner.familyName}}</td>
+                <td>{{ room.capacity }}</td>
+                <td>{{ room.superficy }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.address }}</td>
+                <td>
+                    <a href="{{ path('backoffice_room_show', {'id': room.id}) }}">Show</a>
+                    <a href="{{ path('backoffice_room_edit', {'id': room.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_room_new') }}">Create new</a>
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

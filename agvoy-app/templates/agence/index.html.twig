@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agency welcomes you!{% endblock %}
+
+{% block main %}
+    <h1>Bead & Breakfast</h1>
+    <br/>
+    <p> Please have fun on this website and let's hope you find what you were looking for! </p>
+    <p>Veuillez utiliser la barre supérieure pour naviguer sur le site.</p>
+    {% if is_granted('ROLE_OWNER') %}
+    <p>Vous êtes connecté en tant que Propriétaire. Vous êtes toujours un utilisateur et avez donc les mêmes droits que les simples utilisateurs. 
+    Vous pouvez aussi mettre en ligne les propriétés que vous voulez louer. Pour cela, rendez-vous sur votre page Propriétaire personnelle
+    en cliquant sur 'Your Owner Page' dans le menu déroulant Account dans la barre supérieure. Vos informations y sont affichées; pour ajouter une couette et café, 
+    cliquez sur 'Go to Rooms'. </p>
+    {% else %}
+      {% if is_granted('ROLE_ADMIN') %}
+        <p>Bienvenue Admin ! Vous avez tous les droits sur ce site, vous pouvez soit le naviguer comme un utilisateur standard, ou bien 
+        vous pouvez aller dans le BackOffice dans la barre supérieure et contrôler tous les aspects du site, jusqu'aux utilisateurs.</p>
+      {% else %}
+        {% if is_granted('ROLE_USER') %}
+        <p>Si vous êtes un propriétaire d'un logement que vous souhaitez afficher sur ce site, vous devez créer votre profil de Propriétaire. Pour cela, cliquez sur 
+        <a href="{{path('owner_new')}}">ici</a> ou bien cliquez sur 'Register as an Owner' dans le menu déroulant Account dans la barre supérieure.</p>
+        {% else %}
+      <p>Si vous êtes un propriétaire d'un logement que vous souhaitez afficher sur ce site, vous devez d'abord <a href="{{ path('app_register') }}">créer votre compte utilisateur</a>
+      ou bien <a href="{{ path('app_login') }}">vous connecter à votre compte</a>.
+      <br/>Il faudra alors chercher le menu 'Create your owner account' présent dans le menu déroulant Account dans la barre supérieure.</p>
+      {% endif %}
+      {% endif %}
+    {% endif %}
+    <br/>
+    <br/>
+<style>
+.button-accueil {
+  position: relative;
+  background-color: #A52A2A;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button-accueil:after {
+  content: "";
+  background: #90EE90;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.4s
+}
+
+.button-accueil:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+</style>
+<a href="{{ path('public_region_index') }}"><button class="button-accueil">Annonces Par Région</button></a>
+
+{% endblock %}
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021</a>
+{% endblock %}

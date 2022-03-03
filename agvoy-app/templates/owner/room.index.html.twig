@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{owner.firstname}} {{owner.familyName}}{% endblock %}
+
+{% block main %}
+    <h2>Owner: {{owner.firstname}} {{owner.familyName}}</h2>
+
+    <h4>Rooms Owned</h4>
+    <ul>
+    {% for room in rooms %}
+        <li> <a href="{{ path('owner_room_show', {'id': owner.id, 'id_room': room.id}) }}">{{room.summary}}</a></li>
+        {{room.description}} <br/>
+        {% if room.Address %}
+            Address: {{room.Address}}
+        {% endif %} <br/>
+        Capacity: {{room.Capacity}} people <br/>
+        Superficy: {{room.Superficy}} m²<br/>
+        Price: {{room.price}} €/day<br/>
+        
+
+    <br />
+    {% endfor %}
+    </ul>
+
+    <a href="{{ path('owner_room_new', {'id': owner.id}) }}"><button class="button-blue" type="button">Create a New Room</button></a>
+<br/>
+<br/>
+<td><a href="{{ path('owner_show', {'id': owner.id}) }}"><button class="button2" type="button">&#x21A9; Back to Owner Page</button></a></td>
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

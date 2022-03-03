@@ -1,0 +1,91 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        todos:
+          label: 'Navigate'
+          items: 
+            browsing_divider:
+              is_divider: true
+              label: 'Browse the website'
+            regions:
+              label: 'Regions'
+              route: 'public_region_index'
+            owners:
+              label: 'Owners'
+              route: 'owner_index'
+              roles: ['ROLE_USER']
+            rooms:
+              label: 'Rooms'
+              route: 'room_index'
+
+    login_register:
+      items:
+        account:
+          label: 'Account'
+          items:
+            login_divider:
+              is_divider: true
+              label: 'Login to your account'
+            login:
+              label: 'Login'
+              route: 'app_login'
+            user_egister_divider:
+              is_divider: true
+              label: 'Create your user account'
+            user_register:
+              label: 'Register'
+              route: 'app_register'
+    logout_user:
+      items:
+        account:
+          label: 'Account'
+          items:
+            owner_register_divider:
+              is_divider: true
+              label: 'Create your owner account'
+            owner_register:
+              label: 'Register as an Owner'
+              route: 'owner_new'
+              roles: ['ROLE_USER']
+            logout_divider:
+              is_divider: true
+              label: 'Logout of your account'
+            logout:
+              label: 'Logout'
+              route: 'app_logout'
+              roles: [ 'ROLE_USER']
+    logout_owner:
+      items:
+        account:
+          label: 'Logout'
+          items:
+            logout_divider:
+              is_divider: true
+              label: 'Logout of your account'
+            logout:
+              label: 'Logout'
+              route: 'app_logout'
+              roles: [ 'ROLE_USER']
+    backoffice:
+      items:
+        admin:
+          label: 'BackOffice'
+          items:
+            region:
+              label: 'Regions'
+              route: 'region_index'
+              roles: ['ROLE_ADMIN']
+            owner:
+              label: 'Owners'
+              route: 'backoffice_owner_index'
+              roles: ['ROLE_ADMIN']
+            room:
+              label: 'Rooms'
+              route: 'backoffice_room_index'
+              roles: ['ROLE_ADMIN']
+            users:
+              label: 'Users'
+              route: 'backoffice_user_index'
+              roles: ['ROLE_ADMIN']
+

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{region.name}}{% endblock %}
+
+{% block main %}
+    <h2>Region {{region.name}}</h2>
+    <h4>Rooms</h4>
+    {% dump(region) %}
+    
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Summary</th>
+            <th>Capacity</th>
+            <th>Superficy</th>
+            <th>Price</th>
+            <th>Address</th>
+            <td> &nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for room in rooms %}
+            <tr>
+                <td> {{ room.Summary }}</td>
+                <td>{{ room.Capacity }}</td>
+                <td>{{ room.Superficy }}</td>
+                <td>{{ room.price}}€/day</td>
+                
+                <td>{{ room.Address ? room.Address : '' }}</td>
+                <td><a href="{{ path('public_room_show', {'id': room.id}) }}"><button class="button2" type="button">Go to the Room Page</button></a></td>
+
+            </tr>
+        {%endfor%} {# rooms #}
+    </tbody>
+    </table>
+
+<br />
+
+<a href="{{ path('public_region_index') }}">&#x21A9; Back</a>
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Regions{% endblock %}
+
+{% block main %}
+<h1>List of Available Regions</h1>
+
+<ul>
+    {% for region in regions %}
+        <li>
+            <a href="{{ path('public_region_show', {'id': region.id}) }}">{{region.name}}</a>
+        </li>
+    {%endfor%}
+</ul>
+<br />
+{% if is_granted('ROLE_USER') %}
+    <a href="{{ path('owner_index') }}">Go to Owners</a>
+{% endif %}
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

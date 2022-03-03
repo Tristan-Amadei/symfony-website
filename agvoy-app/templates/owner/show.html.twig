@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{owner.firstname}} {{owner.familyName}}{% endblock %}
+
+{% block main %}
+    <h2>Owner: {{owner.firstname}} {{owner.familyName}}</h2>
+
+    <ul>
+        <li>Country: {{owner.Country}}</li>
+        {% if owner.Address %}
+            <li>Address: {{owner.Address}}</li>
+        {% endif %}
+        <li>Rooms Owned</li>
+        <ul>
+            {% for room in rooms %}
+                <li><a href="{{ path('public_room_show', {'id': room.id}) }}">{{room.Summary}}</a></li>
+                {% if room.Address %}
+                    <ul>Address: {{room.Address}}</ul>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </ul>
+{% if (is_granted('ROLE_ADMIN')) or (is_granted('ROLE_OWNER') and owner.user.id == app.user.id) %}
+    <a href="{{ path('owner_room_index', {'id': owner.id}) }}"><button class="button" type="button">Go to Rooms</button></a>
+{% endif %}
+<br />
+<br />
+<a href="{{ path('owner_index') }}"><button class="button2" type="button">&#x21A9; Back To Owners</button></a>
+{% endblock %} {# body #}
+
+{% block footer %} 
+  <br/>
+  <br/>
+    &copy; Copyright 2021 by T.A</a>
+{% endblock %}

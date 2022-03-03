@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+{% block head %}
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    {% endblock %} {# stylesheets #}
+
+    <title>{% block title %}{% endblock %}</title>
+{% endblock %}
+    </head>
+    <body>
+{% block menu %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('home') }}">Travel Agency</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    {{ render_bootstrap_menu('main') }}
+                </ul>
+            </div>
+            {% if app.user %}
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        {{ render_bootstrap_menu('backoffice') }}
+                    </ul>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            {{ render_bootstrap_menu('logout_owner') }}
+                        </ul>
+                    </div>
+                {% else %}
+                    {% if is_granted('ROLE_OWNER') %}
+
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <h6 class="dropdown-header">Check your favorite rooms</h6>
+                                        <li><a class="dropdown-item" href="{{ path('faved_rooms', {id: app.user.id}) }}">Faved Rooms</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <h6 class="dropdown-header">Check your owner page</h6>
+                                        <li><a class="dropdown-item" href="{{ path('owner_show', {id: app.user.owner.id}) }}">Your Owner Page</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <h6 class="dropdown-header">Check your account details</h6>
+                                        <li><a class="dropdown-item" href="{{ path('account_show', {id: app.user.id}) }}">Your Account</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                {{ render_bootstrap_menu('logout_owner') }}
+                            </ul>
+                        </div>
+
+                    {% else %} {# ROLE_USER #}
+
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <h6 class="dropdown-header">Check your favorite rooms</h6>
+                                        <li><a class="dropdown-item" href="{{ path('faved_rooms', {id: app.user.id}) }}">Faved Rooms</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <h6 class="dropdown-header">Check your account details</h6>
+                                        <li><a class="dropdown-item" href="{{ path('user_account_show', {id: app.user.id}) }}">Your Account</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav ml-auto">
+                                {{ render_bootstrap_menu('logout_user') }}
+                            </ul>
+                        </div>
+
+                        
+                    {% endif %}
+                {% endif %}
+
+            {% else %}
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        {{ render_bootstrap_menu('login_register') }}
+                    </ul>
+                </div>
+            {% endif %}
+            
+        </div>
+    </nav>
+{% endblock %}{# menu #}
+        
+
+    {% block body %}
+
+    {% block alerts %}
+  {% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+        {%if type == 'message'%} {% set type = 'info' %} {%endif%}
+        {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
+        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <p>{{ message|raw }}</p>
+        </div>
+    {% endfor %}
+  {% endfor %}
+{% endblock %} {# alerts #}
+
+  <div class="container body-container">
+
+    <main>
+
+      {% block main %}
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <i>MAIN</i>
+          </p>
+        </div>
+      </div>
+      {% endblock %} {# main #}
+
+    </main>
+
+  </div> <!-- /.body-container -->
+
+                {% block footer %}
+                <div class="row">
+                    <div class="col-md-12">
+                    <footer>
+                        <p>FOOTER</p>
+                    </footer>
+                    </div>
+                </div>
+                {% endblock %}{# footer #}
+
+
+{% endblock %} {# body #}
+
+    {% block javascripts %}
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ asset('js/scripts.js') }}"></script>
+        {% endblock %} {# javascripts #}
+    </body>
+</html>
